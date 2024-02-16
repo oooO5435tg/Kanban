@@ -107,8 +107,8 @@
                 <p>Дата создания: {{ task.createdAt }}</p>
                 <p>Дэдлайн: {{ task.deadline }}</p>
                 <p>Последнее редактирование: {{ task.lastChange }}</p>
-                <p>Задача просрочена</p>
-                <p>Задача выполнена в срок</p>
+                <p class="overdueDeadline" v-if="task.isOverdue">Задача просрочена</p>
+                <p class="completedDeadline" v-else>Задача выполнена в срок</p>
             </div>
         </div>
     </div>

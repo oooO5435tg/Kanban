@@ -8,6 +8,7 @@ new Vue({
                 deadline: '',
                 createdAt: new Date().toLocaleString(),
                 lastChange: null,
+                isOverdue: false
             },
             plannedTasks: [],
             progressTasks: [],
