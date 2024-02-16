@@ -10,7 +10,33 @@
 </head>
 <body>
     <div id="app">
-
+        <div class="addForm">
+            <form>
+                <h2>Форма создания задачи</h2>
+                <label for="title">Заголовок задачи:</label>
+                <input id="title" type="text">
+                <label for="description">Описание задачи:</label>
+                <textarea id="description"></textarea>
+                <label for="deadline">Дэдлайн:</label>
+                <input id="deadline" type="date">
+                <button type="submit">Добавить задачу</button>
+            </form>
+        </div>
+        <div class="column">
+            <h2>Запланированные задачи</h2>
+            <div>
+                <div>
+                    <h3>Заголовок:</h3>
+                    <p>Описание:</p>
+                    <p>Дата создания:</p>
+                    <p>Дэдлайн:</p>
+                    <p>Последнее редактирование:</p>
+                    <button>Редактировать</button>
+                    <button>Удалить</button>
+                    <button>Переместить</button>
+                </div>
+            </div>
+        </div>
     </div>
 </body>
 </html>
