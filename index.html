@@ -11,29 +11,71 @@
 <body>
     <div id="app">
         <div class="addForm">
-            <form>
+            <form @submit.prevent="addTask">
                 <h2>Форма создания задачи</h2>
                 <label for="title">Заголовок задачи:</label>
-                <input id="title" type="text">
-                <label for="description">Описание задачи:</label>
+                <input id="title" type="text" v-model="newTask.title">
+                <label for="description" v-model="newTask.description">Описание задачи:</label>
                 <textarea id="description"></textarea>
                 <label for="deadline">Дэдлайн:</label>
-                <input id="deadline" type="date">
+                <input id="deadline" type="date" v-model="newTask.deadline">
                 <button type="submit">Добавить задачу</button>
             </form>
         </div>
         <div class="column">
             <h2>Запланированные задачи</h2>
-            <div>
+            <div v-for="(task, index) in plannedTasks" :key="index">
                 <div>
-                    <h3>Заголовок:</h3>
-                    <p>Описание:</p>
-                    <p>Дата создания:</p>
-                    <p>Дэдлайн:</p>
-                    <p>Последнее редактирование:</p>
+                    <h3>{{ task.title }}</h3>
+                    <p>{{ task.description }}</p>
+                    <p>Дата создания: {{ task.createdAt }}</p>
+                    <p>Дэдлайн: {{ task.deadline }}</p>
+                    <p>Последнее редактирование: {{ task.lastChange }}</p>
                     <button>Редактировать</button>
-                    <button>Удалить</button>
-                    <button>Переместить</button>
+                    <button class="delete-button" @click="removeTask(index)">Удалить</button>
+                    <button class="move-button" @click="moveToInProgress(index)">Переместить в работу</button>
+                </div>
+            </div>
+        </div>
+        <div class="column">
+            <h2>Задачи в работе</h2>
+            <div v-for="(task, index) in progressTasks" :key="index">
+                <div>
+                    <h3>{{ task.title }}</h3>
+                    <p>{{ task.description }}</p>
+                    <p>Дата создания: {{ task.createdAt }}</p>
+                    <p>Дэдлайн: {{ task.deadline }}</p>
+                    <p>Последнее редактирование: {{ task.lastChange }}</p>
+                    <button>Редактировать</button>
+                    <button class="move-button" @click="moveToTesting(index)">Отправить в тестирование</button>
+                </div>
+            </div>
+        </div>
+        <div class="column">
+            <h2>Тестирование</h2>
+            <div v-for="(task, index) in testingTasks" :key="index">
+                <div>
+                    <h3>{{ task.title }}</h3>
+                    <p>{{ task.description }}</p>
+                    <p>Дата создания: {{ task.createdAt }}</p>
+                    <p>Дэдлайн: {{ task.deadline }}</p>
+                    <p>Последнее редактирование: {{ task.lastChange }}</p>
+                    <button>Редактировать</button>
+                    <button class="move-button" @click="moveToCompleted(index)">Переместить в выполненное</button>
+                </div>
+            </div>
+        </div>
+        <div class="column">
+            <h2>Выполненные задачи</h2>
+            <div v-for="(task, index) in completedTasks" :key="index">
+                <div>
+                    <h3>{{ task.title }}</h3>
+                    <p>{{ task.description }}</p>
+                    <p>Дата создания: {{ task.createdAt }}</p>
+                    <p>Дэдлайн: {{ task.deadline }}</p>
+                    <p>Последнее редактирование: {{ task.lastChange }}</p>
+                    <p>Задача просрочена</p>
+                    <p>Задача выполнена в срок</p>
                 </div>
             </div>
         </div>

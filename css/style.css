@@ -20,9 +20,53 @@ body {
     border-radius: 5px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
-
 .column h2, .addForm h2 {
     font-size: 1.5rem;
     margin-bottom: 1rem;
     color: #333;
+}
+input, textarea, select {
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-top: 0.25rem;
+}
+button {
+    padding: 0.5rem;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    margin-top: 0.5rem;
+    cursor: pointer;
+}
+button:hover {
+    background-color: #45a049;
+}
+.delete-button {
+    background-color: #f44336;
+    margin-top: 0.25rem;
+}
+.move-button{
+    background-color: #97d02d;
+    margin-top: 0.25rem;
+}
+.move-button:hover {
+    background-color: #779f13;
+}
+.delete-button:hover {
+    background-color: #d50000;
+}
+
+
+@media (max-width: 768px) {
+    #app {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .column {
+        margin-right: 0;
+        margin-bottom: 1rem;
+    }
 }
