@@ -13,6 +13,9 @@ new Vue({
             progressTasks: [],
             testingTasks: [],
             completedTasks: [],
+            editedTask: null,
+            editedTaskIndex: null,
+            editedColumn: null,
         }
     },
     methods:{
@@ -41,6 +44,17 @@ new Vue({
                 createdAt: new Date().toLocaleString(),
                 lastChange: null
             }
+        },
+        EditForm(taskIndex) {
+            this[this.editedColumn][taskIndex] = {...this.editedTask, lastChange: new Date().toLocaleString()};
+            this.editedTask = null;
+            this.editedTaskIndex = null;
+            this.editedColumn = null;
+        },
+        EditTask(taskIndex, column) {
+            this.editedTask = {...this[column][taskIndex]};
+            this.editedTaskIndex = taskIndex;
+            this.editedColumn = column;
         },
         removeTask(taskIndex) {
             this.plannedTasks.splice(taskIndex, 1);

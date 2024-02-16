@@ -57,6 +57,14 @@ button:hover {
 .delete-button:hover {
     background-color: #d50000;
 }
+.edit-button {
+    background-color: #2196F3;
+    margin-top: 0.25rem;
+    margin-bottom: 0.5rem;
+}
+.edit-button:hover {
+    background-color: #0e64ab;
+}
 
 
 @media (max-width: 768px) {
