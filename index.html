@@ -84,6 +84,7 @@
                 <p>Последнее редактирование: {{ task.lastChange }}</p>
                 <button class="edit-button" @click="EditTask(index, 'testingTasks')">Редактировать</button>
                 <button class="move-button" @click="moveToCompleted(index)">Переместить в выполненное</button>
+                <button class="move-button" @click="returnToInProgress(index)">Вернуть в работу</button>
             </div>
             <div v-else>
                 <form @submit.prevent="EditForm(index, 'testingTasks')">
