@@ -8,6 +8,7 @@ new Vue({
                 deadline: '',
                 createdAt: new Date().toLocaleString(),
                 lastChange: null,
+                rreturn: null,
                 isOverdue: false
             },
             plannedTasks: [],
@@ -69,6 +70,10 @@ new Vue({
             this.testingTasks.push(taskToMove);
         },
         returnToInProgress(taskIndex) {
+            if (!this.testingTasks[taskIndex].rreturn) {
+                alert('Необходимо указать причину возврата');
+                return;
+            }
             const taskToMove = this.testingTasks.splice(taskIndex, 1)[0];
             this.progressTasks.push(taskToMove);
         },
