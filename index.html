@@ -61,6 +61,7 @@
                 <p>Дата создания: {{ task.createdAt }}</p>
                 <p>Дэдлайн: {{ task.deadline }}</p>
                 <p>Последнее редактирование: {{ task.lastChange }}</p>
+                <p class="reasonReturn" v-if="task.rreturn">Причина возврата: {{ task.rreturn }}</p>
                 <button class="edit-button" @click="EditTask(index, 'progressTasks')">Редактировать</button>
                 <button class="move-button" @click="moveToTesting(index)">Отправить в тестирование</button>
             </div>

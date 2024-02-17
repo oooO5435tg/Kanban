@@ -146,6 +146,10 @@ button:hover {
     margin-bottom: 40px;
 }
 
+.reasonReturn{
+    color: darkred;
+}
+
 @media (max-width: 768px) {
     #app {
         flex-direction: column;
