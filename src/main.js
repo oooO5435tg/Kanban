@@ -9,7 +9,8 @@ new Vue({
                 createdAt: new Date().toLocaleString(),
                 lastChange: null,
                 rreturn: null,
-                isOverdue: false
+                isOverdue: false,
+                tasks: [] // Инициализируем tasks пустым массивом
             },
             plannedTasks: [],
             progressTasks: [],
@@ -22,6 +23,9 @@ new Vue({
         }
     },
     methods:{
+        addTaskItem() {
+            this.newTask.tasks.push('');
+        },
         addTask() {
             if (!this.newTask.title) {
                 alert('Необходимо указать заголовок задачи');
@@ -39,13 +43,21 @@ new Vue({
                 alert('Недействительная дата дэдлайна (минимум должен быть - завтра)');
                 return;
             }
+            // Проверка и разделение списка задач
+            if (this.newTask.tasks.length > 0) {
+                this.newTask.tasks = this.newTask.tasks
+                .filter(task => task.trim() !== '') // удаляем пустые элементы
+                .map(task => ({ name: task, completed: false })); // добавляем чекбоксы в объекты списка задач
+            }
+        
             this.plannedTasks.push({...this.newTask});
             this.newTask = {
                 title: '',
                 description: '',
                 deadline: '',
                 createdAt: new Date().toLocaleString(),
-                lastChange: null
+                lastChange: null,
+                tasks: []
             }
         },
         EditForm(taskIndex) {
@@ -89,6 +101,13 @@ new Vue({
             this.progressTasks.push(taskToMove);
         },
         moveToCompleted(taskIndex) {
+            // Проверяем, что все пункты списка отмечены как выполненные
+            const task = this.testingTasks[taskIndex];
+            if (!task.tasks.every(taskItem => taskItem.completed)) {
+                alert('Невозможно переместить задачу в столбец "Выполненные задачи", поскольку не все пункты списка задач отмечены как выполненные.');
+                return;
+            }
+
             const taskToMove = this.testingTasks.splice(taskIndex, 1)[0];
             taskToMove.isOverdue = new Date(taskToMove.deadline) < new Date();
             this.completedTasks.push(taskToMove);

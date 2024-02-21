@@ -23,9 +23,14 @@
             <textarea id="description" v-model="newTask.description"></textarea>
             <label for="deadline">Дэдлайн:</label>
             <input id="deadline" type="date" v-model="newTask.deadline">
+            <div v-for="(task, index) in newTask.tasks" :key="index">
+                <label :for="'taskItem' + index">Пункт {{ index + 1 }}:</label>
+                <input :id="'taskItem' + index" type="text" v-model="newTask.tasks[index]">
+            </div>
+            <button @click.prevent="addTaskItem">Добавить пункт списка</button>
             <button type="submit">Добавить задачу</button>
         </form>
-    </div>
+    </div>    
     <div class="column">
         <h2>Запланированные задачи</h2>
         <div v-for="(task, index) in plannedTasks" :key="index">
@@ -35,6 +40,13 @@
                 <p>Дата создания: {{ task.createdAt }}</p>
                 <p>Дэдлайн: {{ task.deadline }}</p>
                 <p>Последнее редактирование: {{ task.lastChange }}</p>
+                <p>Список задачи:</p>
+                <ul>
+                    <li v-for="(taskItem, taskItemIndex) in task.tasks" :key="taskItemIndex">
+                        <input :id="'taskCheckbox' + index + taskItemIndex" type="checkbox" v-model="task.tasks[taskItemIndex].completed">
+                        <label :for="'taskCheckbox' + index + taskItemIndex">{{ taskItem.name }}</label>
+                    </li>
+                </ul>
                 <button class="edit-button" @click="EditTask(index, 'plannedTasks')">Редактировать</button>
             </div>
             <div v-else>
@@ -61,6 +73,13 @@
                 <p>Дата создания: {{ task.createdAt }}</p>
                 <p>Дэдлайн: {{ task.deadline }}</p>
                 <p>Последнее редактирование: {{ task.lastChange }}</p>
+                <p>Список задачи:</p>
+                <ul>
+                    <li v-for="(taskItem, taskItemIndex) in task.tasks" :key="taskItemIndex">
+                        <input :id="'taskCheckbox' + index + taskItemIndex" type="checkbox" v-model="task.tasks[taskItemIndex].completed">
+                        <label :for="'taskCheckbox' + index + taskItemIndex">{{ taskItem.name }}</label>
+                    </li>
+                </ul>
                 <p class="reasonReturn" v-if="taskReturnHistory[task.id]">
                     История возвратов:
                     <ul>
@@ -92,6 +111,13 @@
                 <p>Дата создания: {{ task.createdAt }}</p>
                 <p>Дэдлайн: {{ task.deadline }}</p>
                 <p>Последнее редактирование: {{ task.lastChange }}</p>
+                <p>Список задачи:</p>
+                <ul>
+                    <li v-for="(taskItem, taskItemIndex) in task.tasks" :key="taskItemIndex">
+                        <input :id="'taskCheckbox' + index + taskItemIndex" type="checkbox" v-model="task.tasks[taskItemIndex].completed">
+                        <label :for="'taskCheckbox' + index + taskItemIndex">{{ taskItem.name }}</label>
+                    </li>
+                </ul>
                 <button class="edit-button" @click="EditTask(index, 'testingTasks')">Редактировать</button>
                 <button class="move-button" @click="moveToCompleted(index)">Переместить в выполненное</button>
                 <button class="move-button" @click="returnToInProgress(index)">Вернуть в работу</button>
@@ -120,6 +146,12 @@
                 <p>Дата создания: {{ task.createdAt }}</p>
                 <p>Дэдлайн: {{ task.deadline }}</p>
                 <p>Последнее редактирование: {{ task.lastChange }}</p>
+                <p>Список задачи:</p>
+                <ul>
+                    <li v-for="(taskItem, taskItemIndex) in task.tasks" :key="taskItemIndex">
+                       {{ taskItem.name }}
+                    </li>
+                </ul>
                 <p class="overdueDeadline" v-if="task.isOverdue">Задача просрочена</p>
                 <p class="completedDeadline" v-else>Задача выполнена в срок</p>
             </div>
