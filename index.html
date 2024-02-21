@@ -23,11 +23,6 @@
             <textarea id="description" v-model="newTask.description"></textarea>
             <label for="deadline">Дэдлайн:</label>
             <input id="deadline" type="date" v-model="newTask.deadline">
-            <div v-for="(task, index) in newTask.tasks" :key="index">
-                <label :for="'taskItem' + index">Пункт {{ index + 1 }}:</label>
-                <input :id="'taskItem' + index" type="text" v-model="newTask.tasks[index]">
-            </div>
-            <button @click.prevent="addTaskItem">Добавить пункт списка</button>
             <button type="submit">Добавить задачу</button>
         </form>
     </div>    
@@ -43,8 +38,12 @@
                 <p>Список задачи:</p>
                 <ul>
                     <li v-for="(taskItem, taskItemIndex) in task.tasks" :key="taskItemIndex">
-                        <input :id="'taskCheckbox' + index + taskItemIndex" type="checkbox" v-model="task.tasks[taskItemIndex].completed">
+                        <input :id="'taskCheckbox' + index + taskItemIndex" type="checkbox" v-model="taskItem.completed">
                         <label :for="'taskCheckbox' + index + taskItemIndex">{{ taskItem.name }}</label>
+                    </li>
+                    <li>
+                        <input type="text" v-model="newTaskItem[index]">
+                        <button @click="addTaskItem(index)">Добавить пункт списка</button>
                     </li>
                 </ul>
                 <button class="edit-button" @click="EditTask(index, 'plannedTasks')">Редактировать</button>
@@ -76,8 +75,12 @@
                 <p>Список задачи:</p>
                 <ul>
                     <li v-for="(taskItem, taskItemIndex) in task.tasks" :key="taskItemIndex">
-                        <input :id="'taskCheckbox' + index + taskItemIndex" type="checkbox" v-model="task.tasks[taskItemIndex].completed">
+                        <input :id="'taskCheckbox' + index + taskItemIndex" type="checkbox" v-model="taskItem.completed">
                         <label :for="'taskCheckbox' + index + taskItemIndex">{{ taskItem.name }}</label>
+                    </li>
+                    <li>
+                        <input type="text" v-model="newTaskItem[index]">
+                        <button @click="addTaskItem(index)">Добавить пункт списка</button>
                     </li>
                 </ul>
                 <p class="reasonReturn" v-if="taskReturnHistory[task.id]">
@@ -114,8 +117,12 @@
                 <p>Список задачи:</p>
                 <ul>
                     <li v-for="(taskItem, taskItemIndex) in task.tasks" :key="taskItemIndex">
-                        <input :id="'taskCheckbox' + index + taskItemIndex" type="checkbox" v-model="task.tasks[taskItemIndex].completed">
+                        <input :id="'taskCheckbox' + index + taskItemIndex" type="checkbox" v-model="taskItem.completed">
                         <label :for="'taskCheckbox' + index + taskItemIndex">{{ taskItem.name }}</label>
+                    </li>
+                    <li>
+                        <input type="text" v-model="newTaskItem[index]">
+                        <button @click="addTaskItem(index)">Добавить пункт списка</button>
                     </li>
                 </ul>
                 <button class="edit-button" @click="EditTask(index, 'testingTasks')">Редактировать</button>

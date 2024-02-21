@@ -10,7 +10,7 @@ new Vue({
                 lastChange: null,
                 rreturn: null,
                 isOverdue: false,
-                tasks: [] // Инициализируем tasks пустым массивом
+                tasks: [], // Инициализируем tasks пустым массивом
             },
             plannedTasks: [],
             progressTasks: [],
@@ -20,12 +20,36 @@ new Vue({
             editedTaskIndex: null,
             editedColumn: null,
             taskReturnHistory: {}, // объект для хранения истории возвратов
+            newTaskItem: [],
         }
     },
     methods:{
-        addTaskItem() {
-            this.newTask.tasks.push('');
-        },
+        addTaskItem(index) {
+            // if (this.editedColumn === 'plannedTasks') {
+            //   if (this.plannedTasks[index] && this.plannedTasks[index].tasks) {
+            //     this.plannedTasks[index].tasks.push({ name: this.newTaskItem[index], completed: false });
+            //   }
+            // } else if (this.editedColumn === 'progressTasks') {
+            //     if (this.progressTasks[index] && this.progressTasks[index].tasks) {
+            //         this.progressTasks[index].tasks.push({ name: this.newTaskItem[index], completed: false });
+            //     }
+            // } else if (this.editedColumn === 'testingTasks') {
+            //     if (this.testingTasks[index] && this.testingTasks[index].tasks) {
+            //         this.testingTasks[index].tasks.push({ name: this.newTaskItem[index], completed: false });
+            //     }
+            // }
+
+            if (this.plannedTasks[index] && this.plannedTasks[index].tasks) {
+                this.plannedTasks[index].tasks.push({ name: this.newTaskItem[index], completed: false });
+            }
+            if (this.progressTasks[index] && this.progressTasks[index].tasks) {
+                this.progressTasks[index].tasks.push({ name: this.newTaskItem[index], completed: false });
+            }
+            if (this.testingTasks[index] && this.testingTasks[index].tasks) {
+                this.testingTasks[index].tasks.push({ name: this.newTaskItem[index], completed: false });
+            }
+            this.newTaskItem[index] = ''; // очищаем ввод после добавления пункта
+        },          
         addTask() {
             if (!this.newTask.title) {
                 alert('Необходимо указать заголовок задачи');
