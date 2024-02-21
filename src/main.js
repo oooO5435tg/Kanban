@@ -18,6 +18,7 @@ new Vue({
             editedTask: null,
             editedTaskIndex: null,
             editedColumn: null,
+            taskReturnHistory: {}, // объект для хранения истории возвратов
         }
     },
     methods:{
@@ -70,10 +71,20 @@ new Vue({
             this.testingTasks.push(taskToMove);
         },
         returnToInProgress(taskIndex) {
-            if (!this.testingTasks[taskIndex].rreturn) {
+            const task = this.testingTasks[taskIndex];
+            if (!task.rreturn) {
                 alert('Необходимо указать причину возврата');
                 return;
             }
+            
+            // Обновляем историю возвратов
+            if (this.taskReturnHistory[task.id]) {
+                this.taskReturnHistory[task.id].push(task.rreturn);
+            } else {
+                this.taskReturnHistory[task.id] = [task.rreturn];
+            }
+    
+            // Передвигаем задачу в колонку progressTasks
             const taskToMove = this.testingTasks.splice(taskIndex, 1)[0];
             this.progressTasks.push(taskToMove);
         },
